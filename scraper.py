@@ -96,7 +96,9 @@ if __name__ == "__main__":
     if df is not None:
 
         # Garante que o diretório exista antes de salvar
-        os.makedirs(os.path.dirname(args.output), exist_ok=True)
+        dirpath = os.path.dirname(args.output)
+        if dirpath:
+            os.makedirs(dirpath, exist_ok=True)
         df.to_csv(args.output, index=False)
 
         try:
