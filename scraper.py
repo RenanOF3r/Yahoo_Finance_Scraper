@@ -9,6 +9,7 @@ número máximo de tentativas de requisição via argumentos de linha de comando
 import os
 import time
 from urllib.parse import urljoin, urlparse
+import os
 
 import pandas as pd
 import requests
@@ -94,6 +95,7 @@ if __name__ == "__main__":
 
     df = scrape_news(url=args.url, max_retries=args.max_retries)
     if df is not None:
+
         # Garante que o diretório exista antes de salvar
         os.makedirs(os.path.dirname(args.output), exist_ok=True)
         df.to_csv(args.output, index=False)
@@ -105,6 +107,7 @@ if __name__ == "__main__":
         except ModuleNotFoundError:
             # Exibe as primeiras linhas se a ferramenta não estiver disponível
             print(df.head())
+
     else:
         print("Erro ao acessar Yahoo Finance ou resposta inválida.")
 
