@@ -1,7 +1,7 @@
 # Yahoo Finance Scraper
 
 ## Descrição
-Este projeto faz scraping de notícias financeiras do Yahoo Finance. Ele coleta títulos, links e exibe os dados em um DataFrame.
+Este projeto faz scraping de notícias financeiras do Yahoo Finance. Ele coleta títulos e links, exibe um preview no console e salva os dados em um arquivo CSV.
 
 ## Instalação
 1. Clone este repositório:
@@ -23,12 +23,13 @@ python scraper.py
 
 O script tentará conectar até 3 vezes caso haja falhas na requisição.
 
+As primeiras linhas do resultado serão exibidas no terminal e um arquivo `dados/noticias_yahoo.csv` será gerado com todas as notícias coletadas.
+
 ## Tecnologias Utilizadas
 - Python
 - Requests
 - BeautifulSoup
 - Pandas
-- Ace Tools
 
 ## Contribuição
 Contribuições são bem-vindas! Para sugerir melhorias, abra uma issue ou faça um pull request.
