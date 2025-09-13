@@ -9,7 +9,6 @@ número máximo de tentativas de requisição via argumentos de linha de comando
 import os
 import time
 from urllib.parse import urljoin, urlparse
-import os
 
 import pandas as pd
 import requests
