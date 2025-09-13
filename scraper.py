@@ -18,6 +18,7 @@ from bs4 import BeautifulSoup
 BASE_URL = "https://finance.yahoo.com"
 URL = urljoin(BASE_URL, "news/")
 HEADERS = {"User-Agent": "Mozilla/5.0"}  # Evita bloqueios
+NEWS_HEADLINE_SELECTOR = "li.js-stream-content h3 a"
 
 # Tentativa de conexão com retries
 MAX_RETRIES = 3
@@ -55,13 +56,13 @@ def scrape_news(url: str = URL, max_retries: int = MAX_RETRIES) -> pd.DataFrame 
     if response and response.status_code == 200:
         soup = BeautifulSoup(response.text, "html.parser")
 
-        # Encontrando os blocos de notícia
-        articles = soup.find_all("h3")  # Yahoo usa <h3> para manchetes
+        # Encontrando somente as manchetes dentro dos blocos de notícia
+        articles = soup.select(NEWS_HEADLINE_SELECTOR)
 
         news_data = []
         for article in articles:
-            title = article.text
-            href = article.a.get("href") if article.a else ""
+            title = article.get_text(strip=True)
+            href = article.get("href") or ""
             if href:
                 full_url = urljoin(BASE_URL, href)
                 parsed = urlparse(full_url)
