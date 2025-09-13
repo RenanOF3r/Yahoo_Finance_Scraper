@@ -2,9 +2,11 @@ import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 import time
+from urllib.parse import urljoin, urlparse
 
 # URL do Yahoo Finance para notícias
-URL = "https://finance.yahoo.com/news/"
+BASE_URL = "https://finance.yahoo.com"
+URL = urljoin(BASE_URL, "news/")
 HEADERS = {"User-Agent": "Mozilla/5.0"}  # Evita bloqueios
 
 # Tentativa de conexão com retries
@@ -30,7 +32,13 @@ if response and response.status_code == 200:
     news_data = []
     for article in articles:
         title = article.text
-        link = "https://finance.yahoo.com" + article.a["href"] if article.a else "N/A"
+        href = article.a.get("href") if article.a else ""
+        if href:
+            full_url = urljoin(BASE_URL, href)
+            parsed = urlparse(full_url)
+            link = full_url if parsed.scheme and parsed.netloc else "N/A"
+        else:
+            link = "N/A"
         news_data.append({"Título": title, "Link": link})
 
     # Criar DataFrame
