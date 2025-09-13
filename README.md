@@ -23,7 +23,14 @@ python scraper.py
 
 O script tentará conectar até 3 vezes caso haja falhas na requisição.
 
-As primeiras linhas do resultado serão exibidas no terminal e um arquivo `dados/noticias_yahoo.csv` será gerado com todas as notícias coletadas.
+
+Os resultados são gravados por padrão em `dados/noticias_yahoo.csv`. Para
+alterar o caminho de saída, utilize o parâmetro `--output`:
+
+```bash
+python scraper.py --output caminho/para/arquivo.csv
+```
+
 
 ## Tecnologias Utilizadas
 - Python
