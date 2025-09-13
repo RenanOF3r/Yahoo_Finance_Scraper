@@ -1,0 +1,4 @@
+requests
+beautifulsoup4
+pandas
+ace_tools

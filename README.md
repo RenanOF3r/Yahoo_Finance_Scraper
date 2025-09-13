@@ -28,6 +28,7 @@ O script tentará conectar até 3 vezes caso haja falhas na requisição.
 - Requests
 - BeautifulSoup
 - Pandas
+- Ace Tools
 
 ## Contribuição
 Contribuições são bem-vindas! Para sugerir melhorias, abra uma issue ou faça um pull request.
