@@ -8,6 +8,7 @@ número máximo de tentativas de requisição via argumentos de linha de comando
 
 import time
 from urllib.parse import urljoin, urlparse
+import os
 
 import pandas as pd
 import requests
@@ -88,13 +89,9 @@ if __name__ == "__main__":
 
     df = scrape_news(url=args.url, max_retries=args.max_retries)
     if df is not None:
-        try:
-            import ace_tools as tools
-
-            tools.display_dataframe_to_user(name="Notícias Yahoo Finance", dataframe=df)
-        except ModuleNotFoundError:
-            # Exibe as primeiras linhas se a ferramenta não estiver disponível
-            print(df.head())
+        os.makedirs("dados", exist_ok=True)
+        df.to_csv("dados/noticias_yahoo.csv", index=False)
+        print(df.head())
     else:
         print("Erro ao acessar Yahoo Finance ou resposta inválida.")
 
